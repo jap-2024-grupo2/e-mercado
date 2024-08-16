@@ -32,7 +32,7 @@ nav a {
   height: 50vh;
   padding: 5em inherit;
   margin-bottom: 0;
-  background-color: #53C0FB;
+  background-color: #53c0fb;
   background: url('../img/cover_back.png');
   background-size: cover;
   background-position: center;
@@ -73,12 +73,12 @@ footer {
 }
 
 footer p {
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .site-header a {
   color: white;
-  transition: ease-in-out color .15s;
+  transition: ease-in-out color 0.15s;
 }
 
 .site-header .dropdown-menu a {
@@ -86,7 +86,7 @@ footer p {
 }
 
 .dropzone {
-  border: 2px dashed #0087F7;
+  border: 2px dashed #0087f7;
   border-radius: 5px;
   background: white;
 }
@@ -187,4 +187,33 @@ a.custom-card:hover {
 
 .checked {
   color: orange;
+}
+
+.category-title {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.card-title-h5,
+.card-price {
+  font-size: 20px;
+}
+
+.card-title-h5:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.card-description {
+  font-size: 16px;
+  color: #68717a;
+}
+
+.card-price {
+  font-weight: 700;
+}
+
+.card-sold-count {
+  font-size: 12px;
+  color: #68717a;
 }
