@@ -1,13 +1,20 @@
-document.addEventListener("DOMContentLoaded", function() {
-    if (!sessionStorage.getItem("loggedIn")) {
-        window.location.href ="login.html"
-    }
+document.addEventListener('DOMContentLoaded', function () {
+  // Verificamos si no hay un estado de autenticación activo
+  if (!localStorage.getItem('loggedIn')) {
+    // Redirigimos al usurio a la página de inicio de sesión
+    window.location.href = 'login.html'
+  }
 })
 
+// Función para cerrar sesión
 function logout() {
-    sessionStorage.removeItem("loggedIn")
-    localStorage.removeItem("userName")
-    localStorage.removeItem("password")
+  // Eliminamos el estado de autenticación
+  localStorage.removeItem('loggedIn')
 
-    window.location.href ="login.html"
+  // Eliminamos las credenciales guardadas
+  localStorage.removeItem('userName')
+  localStorage.removeItem('password')
+
+  // Redirigimos al usuario a la página de inicio de sesión
+  window.location.href = 'login.html'
 }
