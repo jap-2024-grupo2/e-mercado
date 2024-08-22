@@ -13,7 +13,7 @@ fetch('https://japceibal.github.io/emercado-api/cats_products/101.json')
     products.forEach(
       ({ image, name, description, currency, cost, soldCount }) => {
         const card = document.createElement('div')
-        card.classList.add('card', 'm-4')
+        card.classList.add('card', 'm-4', 'custom-card', 'cursor-active')
         card.style = 'width: 24rem;'
 
         const img = document.createElement('img')
