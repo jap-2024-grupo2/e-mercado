@@ -39,3 +39,15 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+document.addEventListener("DOMContentLoaded", setUserNameInNavBar())
+
+function setUserNameInNavBar() {
+  const navItemsUserName = document.querySelectorAll(".userName-navBar")
+  const userName = localStorage.getItem("userName")
+
+  navItemsUserName.forEach((navItem) => {
+    navItem.textContent = userName
+  })
+}
+
