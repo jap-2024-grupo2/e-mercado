@@ -1,7 +1,6 @@
 fetch('https://japceibal.github.io/emercado-api/cats_products/101.json')
   .then((res) => res.json())
   .then(({ products, catName }) => {
-    console.log(products)
 
     const categoryTitle = document.getElementById('categoryTitle')
     categoryTitle.textContent = catName
@@ -12,8 +11,12 @@ fetch('https://japceibal.github.io/emercado-api/cats_products/101.json')
 
     products.forEach(
       ({ image, name, description, currency, cost, soldCount }) => {
+        
+        const column = document.createElement('div')
+        column.classList.add('col-12', 'col-md-6', 'col-lg-4', 'my-3')
+
         const card = document.createElement('div')
-        card.classList.add('card', 'm-4', 'custom-card', 'cursor-active')
+        card.classList.add('card', 'custom-card', 'cursor-active', 'h-100', 'w-100')
         card.style = 'width: 24rem;'
 
         const img = document.createElement('img')
@@ -22,18 +25,18 @@ fetch('https://japceibal.github.io/emercado-api/cats_products/101.json')
         img.alt = `Imagen de ${name}`
 
         const cardBody = document.createElement('div')
-        cardBody.classList.add('card-body')
+        cardBody.classList.add('card-body', 'd-flex', 'flex-column', 'justify-content-between')
 
         const cardTitle = document.createElement('h5')
         cardTitle.classList.add('card-title', 'card-title-h5')
         cardTitle.textContent = name
 
         const cardDescription = document.createElement('p')
-        cardDescription.classList.add('card-text', 'card-description')
+        cardDescription.classList.add('card-text', 'card-description', 'flex-grow-1')
         cardDescription.textContent = description
 
         const cardPrice = document.createElement('p')
-        cardPrice.classList.add('card-text', 'card-price')
+        cardPrice.classList.add('card-text', 'card-price', 'mt-auto')
         cardPrice.textContent = `${currency} ${cost}`
 
         const cardSoldCount = document.createElement('p')
@@ -42,7 +45,8 @@ fetch('https://japceibal.github.io/emercado-api/cats_products/101.json')
 
         cardBody.append(cardTitle, cardDescription, cardPrice, cardSoldCount)
         card.append(img, cardBody)
-        fragment.appendChild(card)
+        column.appendChild(card)
+        fragment.appendChild(column)
       }
     )
 
