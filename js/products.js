@@ -1,4 +1,6 @@
-fetch('https://japceibal.github.io/emercado-api/cats_products/101.json')
+const catID = localStorage.getItem("catID")
+
+fetch(`https://japceibal.github.io/emercado-api/cats_products/${catID}.json`)
   .then((res) => res.json())
   .then(({ products, catName }) => {
 
@@ -9,9 +11,14 @@ fetch('https://japceibal.github.io/emercado-api/cats_products/101.json')
 
     const fragment = document.createDocumentFragment()
 
+    if (products.length === 0) {
+      showAlert("No hay productos disponibles para esta categoría")
+      return
+    }
+
     products.forEach(
       ({ image, name, description, currency, cost, soldCount }) => {
-        
+
         const column = document.createElement('div')
         column.classList.add('col-12', 'col-md-6', 'col-lg-4', 'my-3')
 
@@ -52,3 +59,17 @@ fetch('https://japceibal.github.io/emercado-api/cats_products/101.json')
 
     productsContainer.appendChild(fragment)
   })
+
+function showAlert(message) {
+  const alertContainer = document.createElement('div')
+  alertContainer.className = 'alert alert-warning alert-dismissible fade show'
+  alertContainer.role = 'alert'
+  alertContainer.innerHTML = `
+          <strong>Advertencia:</strong> ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      `
+
+  // Insertar la alerta justo después del título de la categoría
+  const categoryTitle = document.getElementById('categoryTitle')
+  categoryTitle.insertAdjacentElement('afterend', alertContainer)
+}
