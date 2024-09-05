@@ -1,4 +1,8 @@
 const catID = localStorage.getItem("catID")
+let currentProductsArray = [];
+let minPrice = undefined;
+let maxPrice = undefined;
+
 
 fetch(`https://japceibal.github.io/emercado-api/cats_products/${catID}.json`)
   .then((res) => res.json())
@@ -7,18 +11,27 @@ fetch(`https://japceibal.github.io/emercado-api/cats_products/${catID}.json`)
     const categoryTitle = document.getElementById('categoryTitle')
     categoryTitle.textContent = catName
 
-    const productsContainer = document.getElementById('productsContainer')
-
-    const fragment = document.createDocumentFragment()
+    currentProductsArray = products
 
     if (products.length === 0) {
       showAlert("No hay productos disponibles para esta categoría")
       return
     }
 
-    products.forEach(
-      ({ image, name, description, currency, cost, soldCount }) => {
+    showProductsList()
+  })
 
+function showProductsList() {
+  const productsContainer = document.getElementById('productsContainer')
+  productsContainer.innerHTML = ""
+
+  const fragment = document.createDocumentFragment()
+
+  currentProductsArray.forEach(
+    ({ image, name, description, currency, cost, soldCount }) => {
+
+      if (minPrice == undefined || (minPrice != undefined && parseFloat(cost) >= minPrice) &&
+        maxPrice == undefined || (maxPrice != undefined && parseFloat(cost) >= maxPrice)) {
         const column = document.createElement('div')
         column.classList.add('col-12', 'col-md-6', 'col-lg-4', 'my-3')
 
@@ -55,10 +68,35 @@ fetch(`https://japceibal.github.io/emercado-api/cats_products/${catID}.json`)
         column.appendChild(card)
         fragment.appendChild(column)
       }
-    )
+    }
+  )
 
-    productsContainer.appendChild(fragment)
-  })
+  productsContainer.appendChild(fragment)
+}
+
+function sortProducts(criteria) {
+  if (criteria === "ascPrice") {
+    currentProductsArray.sort((a, b) => parseFloat(a.cost) - parseFloat(b.cost))
+  } else if (criteria === "descPrice") {
+    currentProductsArray.sort((a, b) => parseFloat(b.cost) - parseFloat(a.cost))
+  } else if (criteria === "relevance") {
+    currentProductsArray.sort((a, b) => parseFloat(b.soldCount) - parseFloat(a.soldCount))
+  }
+
+  showProductsList();
+}
+
+document.getElementById("sortAscPrice").addEventListener("click", function() {
+  sortProducts("ascPrice");
+})
+
+document.getElementById("sortDescPrice").addEventListener("click", function() {
+  sortProducts("descPrice");
+})
+
+document.getElementById("sortByRelevance").addEventListener("click", function() {
+  sortProducts("relevance");
+})
 
 function showAlert(message) {
   const alertContainer = document.createElement('div')
