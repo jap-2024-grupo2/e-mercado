@@ -25,13 +25,13 @@ function setProductID(id) {
   window.location = 'product-info.html'
 }
 
-function showProductsList() {
+function showProductsList(products = currentProductsArray) {
   const productsContainer = document.getElementById('productsContainer')
   productsContainer.innerHTML = '' // Limpiar el contenedor antes de mostrar
 
   const fragment = document.createDocumentFragment()
 
-  currentProductsArray.forEach(
+  products.forEach(
     ({ id, image, name, description, currency, cost, soldCount }) => {
       if (
         (minPrice == undefined ||
@@ -158,6 +158,17 @@ document
 
     showProductsList()
   })
+
+document.getElementById("inputSearch").addEventListener("input", function () {
+  const searchText = this.value.toLowerCase()
+  const filteredProducts = currentProductsArray.filter(({ name, description }) => {
+    return (
+      name.toLowerCase().includes(searchText) || description.toLowerCase().includes(searchText)
+    )
+  })
+
+  showProductsList(filteredProducts)
+})
 
 function showAlert(message) {
   const alertContainer = document.createElement('div')
