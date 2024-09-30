@@ -1,6 +1,8 @@
 // Obtenemos la ID del producto guardado previamente en el localStorage
 const productID = localStorage.getItem('productID')
 
+const commentsSection = document.getElementById('comments-section')
+
 // Creamos un elemento para el carrusel con la imagen correspondiente
 const createCarouselItem = (imgSrc, isActive, altText) => `
   <div class="carousel-item ${isActive ? 'active' : ''}">
@@ -42,11 +44,11 @@ fetch(`https://japceibal.github.io/emercado-api/products/${productID}.json`)
 
       // Generamos el contenido del carrusel horizontal
       const carouselInner = images
-        .slice(1, 4)        // Seleccionamos solo las imágenes necesarias
+        .slice(1, 4) // Seleccionamos solo las imágenes necesarias
         .map((imgSrc, index) =>
           createCarouselItem(
             imgSrc,
-            index === 0,    // Marcamos la primera imagen como activa
+            index === 0, // Marcamos la primera imagen como activa
             `Imagen ${index + 1} de ${name}`
           )
         )
@@ -71,12 +73,12 @@ fetch(`https://japceibal.github.io/emercado-api/products/${productID}.json`)
 
       // Generamos el contenido de las imágenes verticales
       const verticalImagesInner = images
-        .slice(1, 4)        // Seleccionamos las imágenes necesarias
+        .slice(1, 4) // Seleccionamos las imágenes necesarias
         .map((imgSrc, index, array) =>
           createImageElement(
             imgSrc,
             `Imagen ${index + 1} de ${name}`,
-            index === array.length - 1        // Eliminamos margen para la última imagen
+            index === array.length - 1 // Eliminamos margen para la última imagen
           )
         )
         .join('')
@@ -92,11 +94,114 @@ fetch(`https://japceibal.github.io/emercado-api/products/${productID}.json`)
 
       // Ajustamos los carruseles según el tamaño de la pantalla al cargar la página
       adjustCarousels(horizontalCarousel, verticalImages)
-      window.addEventListener('resize', () =>
-        adjustCarousels(horizontalCarousel, verticalImages)   // Reajustamos carruseles al redimensionar la ventana
+      window.addEventListener('resize', () => adjustCarousels(horizontalCarousel, verticalImages) // Reajustamos carruseles al redimensionar la ventana
       )
     }
   )
   .catch((error) => {
-    console.error('Error fetching datos del producto:', error)    // Capturamos errores en la obtención de datos
+    console.error('Error fetching datos del producto:', error) // Capturamos errores en la obtención de datos
   })
+
+// Fetch para listar los comentarios provinientes de la API
+fetch(`https://japceibal.github.io/emercado-api/products_comments/${productID}.json`)
+  .then((res) => res.json())
+  .then((comments) => {
+    comments.forEach(({ score, description, user, dateTime }) => {
+      commentsSection.innerHTML += createComment(user, dateTime, score, description)
+    })
+  })
+  .catch((error) => console.error('Error fetching comentarios:', error))
+
+// Función para crear un comentario
+function createComment(user, dateTime, score, description) {
+  return `
+    <div class="my-1">
+      <div class="row">
+        <div class="col-md-8 w-100">
+          <div class="card review-card shadow-sm">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-4 border-end">
+                  <h5 class="mb-0 customer-name">${user}</h5>
+                  <small class="text-muted">${formatDate(dateTime)}</small>
+                </div>
+                <div class="col-md-8">
+                  <div class="stars mb-2" aria-label="Rating: ${score} out of 5 stars">
+                    ${createStars(score)}
+                  </div>
+                  <p class="review-text mb-2">${description}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `
+}
+
+// Función para crear las estrellas
+function createStars(userScore) {
+  let estrellasHTML = ''
+  for (let i = 1; i <= 5; i++) {
+    estrellasHTML += `<i class="fa fa-star ${i <= userScore ? 'checked' : ''}"></i>`
+  }
+
+  return estrellasHTML
+}
+
+// Función para formatear la fecha que viene por la API
+function formatDate(dateTimeString) {
+  const date = new Date(dateTimeString) // Creamos una instancia de Date a partir del string de la fecha que viene de la API
+
+  // Opciones para formatear la fecha
+  const options = {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  }
+
+  // Formateamos la fecha con toLocaleDateString 'es-ES' para español
+  return date.toLocaleDateString('es-ES', options)
+}
+
+// Simulación de envío de comentario
+function submitComment() {
+  const user = localStorage.getItem('userName')
+  const commentText = document.getElementById('rating-text').value.trim()
+  const ratingStars = document.getElementById('rating-stars').value
+
+  const newComment = createComment(user, new Date(), ratingStars, commentText)
+
+  commentsSection.innerHTML += newComment
+  document.getElementById('rating-text').value = ''
+}
+
+// Cargar los productos relacionados desde la API
+fetch(`https://japceibal.github.io/emercado-api/products/${productID}.json`)
+  .then((response) => response.json())
+  .then(({ relatedProducts }) => {
+    const relatedSection = document.getElementById('related-products')
+
+    relatedProducts.forEach(({ id, name, image }) => {
+      relatedSection.innerHTML += `
+        <div class="col-12 col-md-6 col-lg-4 my-2" style="width: 18rem;">
+          <div class="related-product card cursor-active" onclick="selectProduct(${id})">
+            <img src="${image}" class="card-img-top" alt="${name}" loading="lazy">
+            <div class="card-body">
+              <h5 class="card-title">${name}</h5>
+            </div>
+          </div>
+        </div>
+        `
+    })
+  })
+  .catch((error) => console.error('Error fetching related products:', error))
+
+// Actualizamos el ID del producto en el localStorage y redirigimos
+function selectProduct(id) {
+  localStorage.setItem('productID', id)
+  window.location = 'product-info.html'
+}

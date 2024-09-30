@@ -56,7 +56,7 @@
       </div>
     </div>
   </nav>
-  <main>
+  <main class="container">
     <section class="py-5">
       <div class="container-xl px-lg-5 my-1 my-md-5">
         <div class="row gx-4 gx-lg-5 align-items-center" id="content-container">
@@ -70,7 +70,8 @@
             </div>
             <p class="lead" id="product-info-description"></p>
             <div class="d-flex flex-row flex-sm-column flex-lg-row" id="product-info-soldCount-addToCart">
-              <span class="form-control text-center mb-sm-2 mb-lg-0 me-3 me-sm-0 me-lg-3 w-auto" id="product-info-soldCount"></span>
+              <span class="form-control text-center mb-sm-2 mb-lg-0 me-3 me-sm-0 me-lg-3 w-auto"
+                id="product-info-soldCount"></span>
               <button class="btn btn-primary flex-shrink-0" type="button">
                 <i class="bi-cart-fill me-1"></i>
                 Agregar al carro
@@ -81,7 +82,37 @@
       </div>
     </section>
 
+    <section class="container">
+      <h2>Productos relacionados</h2>
+      <div class="row" id="related-products"></div>
+    </section>
+
+    <section class="container my-5" id="rate-product">
+      <h2>Dejar una calificación</h2>
+      <form id="rating-form">
+        <div class="mb-3">
+          <label for="rating-text" class="form-label">Comentario</label>
+          <textarea class="form-control" id="rating-text" rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="rating-stars" class="form-label">Calificación</label>
+          <select id="rating-stars" class="form-select">
+            <option value="1">⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="submitComment()">Enviar</button>
+      </form>
+    </section>
+
+    <section class="container" id="comments-section">
+      <h2>Calificaciones</h2>
+    </section>
   </main>
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
