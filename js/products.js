@@ -159,15 +159,30 @@ document
     showProductsList()
   })
 
-document.getElementById("inputSearch").addEventListener("input", function () {
-  const searchText = this.value.toLowerCase()
-  const filteredProducts = currentProductsArray.filter(({ name, description }) => {
-    return (
-      name.toLowerCase().includes(searchText) || description.toLowerCase().includes(searchText)
-    )
-  })
+// Función para normalizar el texto: lo convierte a minúsculas, elimina acentos y carecteres especiales
+function normalizeText(text) {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+}
 
-  showProductsList(filteredProducts)
+document.getElementById('inputSearch').addEventListener('input', function () {
+  const searchTerm = normalizeText(this.value) // Normalizamos el término de búsqueda.
+
+  const filteredProducts = currentProductsArray.filter(
+    ({ name, description }) => {
+      const normalizedTitle = normalizeText(name) // Normalizamos el nombre del producto.
+      const normalizedDescription = normalizeText(description) // Normalizamos la descripción del producto.
+
+      return (
+        normalizedTitle.includes(searchTerm) || // Buscamos coincidencias en el nombre.
+        normalizedDescription.includes(searchTerm) // Buscamos coincidencias en la descripción.
+      )
+    }
+  )
+
+  showProductsList(filteredProducts) // Mostrar los productos filtrados
 })
 
 function showAlert(message) {
