@@ -45,7 +45,7 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
-            <p class="userName-navBar navbar-text m-0 text-white" ></p>
+            <p class="userName-navBar navbar-text m-0 text-white"></p>
           </li>
           <li class="nav-item">
             <button onclick="logout()" class="btn btn-primary">Cerrar sesión</button>
@@ -54,19 +54,55 @@
       </div>
     </div>
   </nav>
+ 
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+      <h2 class="mt-5 mb-5">Perfil de usuario</h2>
+      <form id="profile-form">
+        <div class="mb-3">
+          <label for="firstName" class="form-label">Nombre*</label>
+          <input type="text" class="form-control" id="firstName" required>
+        </div>
+        <div class="mb-3">
+          <label for="secondName" class="form-label">Segundo nombnre</label>
+          <input type="text" class="form-control" id="secondName">
+        </div>
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Apellido*</label>
+          <input type="text" class="form-control" id="lastName" required>
+        </div>
+        <div class="mb-3">
+          <label for="secondLastName" class="form-label">Segundo apellido</label>
+          <input type="text" class="form-control" id="secondLastName">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">E-mail*</label>
+          <input type="email" class="form-control" id="email" required>
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">Teléfono de contacto</label>
+          <input type="tel" class="form-control" id="phone">
+        </div>
+        <div class="mb-3">
+          <label for="profilePic" class="form-label">Foto de perfil</label>
+          <input type="file" class="form-control" id="profilePic" accept="image/*">
+        </div>
+        <div class="mb-3">
+          <label for="themeSwitch" class="form-label">Modo día/noche</label>
+          <input type="checkbox" class="form-check-input" id="themeSwitch">
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      </form>
     </div>
   </main>
+  
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
         <a href="#">Volver arriba</a>
       </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+      </p>
     </div>
   </footer>
   <script src="js/bootstrap.bundle.min.js"></script>
