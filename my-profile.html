@@ -44,12 +44,19 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
-            <p class="userName-navBar navbar-text m-0 text-white" ></p>
+
+          /* usuario como menu desplegable */
+          <li class="nav-item" dropdown> 
+            <a class="nav-link dropdown-toggle" href="#" id="userNameDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <p class="userName-navBar navbar-text m-0 text-white" ></p>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="userNameDropdown">
+            <a class="dropdown-item" href="cart.html">Mi carrito</a>
+            <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+            <button class="dropdown-item" onclick="logout()">Cerrar sesión</button>
+          </div>
           </li>
-          <li class="nav-item">
-            <button onclick="logout()" class="btn btn-primary">Cerrar sesión</button>
-          </li>
+
         </ul>
       </div>
     </div>
