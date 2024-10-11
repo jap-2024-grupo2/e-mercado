@@ -205,3 +205,19 @@ function selectProduct(id) {
   localStorage.setItem('productID', id)
   window.location = 'product-info.html'
 }
+
+
+// Función para aplicar el Modo Noche o Modo Día basado en la preferencia almacenada
+function applyThemePreference() {
+  const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+  if (darkModeEnabled) {
+    document.body.classList.add('dark-mode');
+  } else {
+    document.body.classList.remove('dark-mode');
+  }
+}
+
+// Inicializar la funcionalidad de Modo Noche/Día al cargar la página
+window.addEventListener('DOMContentLoaded', function() {
+  applyThemePreference(); // Aplicar el tema al cargar la página
+});
