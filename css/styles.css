@@ -299,3 +299,26 @@ a.custom-card:hover {
     width: 100% !important;
   }
 }
+
+/* Estilos para el Modo Noche */
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+body.dark-mode .card {
+  background-color: #1e1e1e;
+  border-color: #333;
+}
+
+body.dark-mode .form-control {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border-color: #333;
+}
+
+body.dark-mode select.form-select {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border-color: #333;
+}
