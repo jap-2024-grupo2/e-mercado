@@ -35,7 +35,7 @@
 
   <main class="container">
     <section class="py-5">
-      <div class="container-xl px-lg-5 my-1 my-md-5">
+      <div class="container-xl px-lg-5 my-1 my-md-5" id="addToCart">
         <div class="row gx-4 gx-lg-5 align-items-center" id="content-container">
           <div class="col-sm-6" id="image-holder"><img class="card-img-top card-img-bottom mb-4 mb-md-0"
               id="product-info-img" /></div>
@@ -49,9 +49,9 @@
             <div class="d-flex flex-row flex-sm-column flex-lg-row" id="product-info-soldCount-addToCart">
               <span class="form-control text-center mb-sm-2 mb-lg-0 me-3 me-sm-0 me-lg-3 w-auto"
                 id="product-info-soldCount"></span>
-              <button class="btn btn-primary flex-shrink-0" type="button">
-                <i class="bi-cart-fill me-1"></i>
-                Agregar al carro
+                <button id="add-to-cart-button" class="btn btn-primary flex-shrink-0" type="button">
+                  <i class="bi-cart-fill me-1"></i>
+                  Agregar al carro
               </button>
             </div>
           </div>
@@ -112,6 +112,7 @@
   <script src="js/navbar.js"></script>
   <script src="js/product-info.js"></script>
   <script src="js/logout.js"></script>
+  <script src="js/cart.js" defer></script>
 </body>
 
 </html>
