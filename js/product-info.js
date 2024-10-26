@@ -2,16 +2,17 @@
 const productID = localStorage.getItem('productID')
 
 const commentsSection = document.getElementById('comments-section')
+const addToCartButton = document.getElementById("add-to-cart-button")
 
 // Creamos un elemento para el carrusel con la imagen correspondiente
 const createCarouselItem = (imgSrc, isActive, altText) => `
   <div class="carousel-item ${isActive ? 'active' : ''}">
     <img src="${imgSrc}" class="d-block w-100" alt="${altText}">
-  </div>`
+  </div>
+`
 
 // Creamos un elemento de imagen con o sin margen inferior, según si es la última imagen
-const createImageElement = (imgSrc, altText, isLast) => `
-  <img src="${imgSrc}" class="${isLast ? '' : 'mb-3 mb-lg-4'}" alt="${altText}" style="width: 100%;">`
+const createImageElement = (imgSrc, altText, isLast) => `<img src="${imgSrc}" class="${isLast ? '' : 'mb-3 mb-lg-4'}" alt="${altText}" style="width: 100%;">`
 
 // Ajustamos la visibilidad del carrusel y de las imágenes verticales según el tamaño de la pantalla
 const adjustCarousels = (horizontalCarousel, verticalImages) => {
@@ -65,7 +66,8 @@ fetch(`https://japceibal.github.io/emercado-api/products/${productID}.json`)
         <button class="carousel-control-next" type="button" data-bs-target="#horizontalCarousel" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
-        </button>`
+        </button>
+      `
 
       // Creamos el contenedor de imágenes vertical dinámico
       const verticalImages = document.createElement('div')
@@ -101,6 +103,61 @@ fetch(`https://japceibal.github.io/emercado-api/products/${productID}.json`)
   .catch((error) => {
     console.error('Error fetching datos del producto:', error) // Capturamos errores en la obtención de datos
   })
+
+// Funcionalidad agregar producto al carrito
+addToCartButton.addEventListener("click", () => {
+  // Capturamos la información del producto desde el DOM
+  const productInfo = {
+    id: productID,
+    name: document.getElementById("product-info-name").textContent,
+    description: document.getElementById("product-info-description").textContent,
+    cost: document.getElementById("product-info-cost").textContent,
+    category: document.getElementById("product-info-category").textContent,
+    soldCount: document.getElementById("product-info-soldCount").textContent,
+    image: document.getElementById("product-info-img").src,
+  }
+
+  // Obtenemos la lista actual del carrito del localStorage o creamos una nueva si está vacío
+  let cart = JSON.parse(localStorage.getItem("cart")) || []
+
+  // Agregamos el producto solo si no está ya en el carrito
+  const productExists = cart.some(item => item.id === productInfo.id)
+  if (!productExists) {
+    cart.push(productInfo)
+  } else {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Producto ya en el carrito',
+      text: 'Este producto ya está agregado al carrito.',
+    })
+    return
+  }
+
+  // Guardamos nuevamente la lista actualizada en el localStorage
+  localStorage.setItem("cart", JSON.stringify(cart))
+
+  // Disparamos el evento para actualizar el badge en tiempo real
+  dispatchCartUpdatedEvent();
+
+  // SweetAlert2 para confirmar que el producto fue agregado al carrito
+  Swal.fire({
+    title: '¡Producto agregado!',
+    text: '¿Qué te gustaría hacer ahora?',
+    icon: 'success',
+    showCancelButton: true,
+    confirmButtonText: 'Ir al carrito',
+    cancelButtonText: 'Seguir comprando',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Redirigimos al carrito
+      window.location.href = "cart.html";
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      // Continuar comprando (no hacemos nada, solo cerrar el modal)
+    }
+  })
+})
+
 
 // Fetch para listar los comentarios provinientes de la API
 fetch(`https://japceibal.github.io/emercado-api/products_comments/${productID}.json`)
@@ -195,7 +252,7 @@ fetch(`https://japceibal.github.io/emercado-api/products/${productID}.json`)
             </div>
           </div>
         </div>
-        `
+      `
     })
   })
   .catch((error) => console.error('Error fetching related products:', error))
@@ -209,15 +266,15 @@ function selectProduct(id) {
 
 // Función para aplicar el Modo Noche o Modo Día basado en la preferencia almacenada
 function applyThemePreference() {
-  const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+  const darkModeEnabled = localStorage.getItem('darkMode') === 'true'
   if (darkModeEnabled) {
-    document.body.classList.add('dark-mode');
+    document.body.classList.add('dark-mode')
   } else {
-    document.body.classList.remove('dark-mode');
+    document.body.classList.remove('dark-mode')
   }
 }
 
 // Inicializar la funcionalidad de Modo Noche/Día al cargar la página
 window.addEventListener('DOMContentLoaded', function() {
-  applyThemePreference(); // Aplicar el tema al cargar la página
-});
+  applyThemePreference() // Aplicar el tema al cargar la página
+})
