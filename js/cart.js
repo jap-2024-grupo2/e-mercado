@@ -11,9 +11,14 @@ function createCartRow(product) {
     <tr data-product-id="${id}">
       <th scope="row">
         <div class="d-flex align-items-center">
-          <img src="${image}" class="img-fluid rounded-3" style="width: 120px;" alt="${name}">
+          <img src="${image}" class="img-fluid rounded-3 cursor-active" style="width: 120px;" alt="${name}" onclick="setProductID('${id}')">
           <div class="flex-column ms-4" style="min-width: 0;">
-            <p class="mb-0 text-truncate" style="max-width: fit-content;">${name}</p>
+            <p class="mb-0 text-truncate cursor-active" style="max-width: fit-content; cursor: pointer;"
+              onclick="setProductID('${id}')"
+              onmouseover="this.style.textDecoration='underline';" 
+              onmouseout="this.style.textDecoration='none';">
+              ${name}
+            </p>
           </div>
         </div>
       </th>
