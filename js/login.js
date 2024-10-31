@@ -42,7 +42,11 @@ function handleFormSubmit(event) {
     if (userName === storedUsername && password === storedPassword) {
       login()
     } else {
-      alert('Credenciales incorrectas')
+      Swal.fire({
+        title: "Credenciales incorrectas",
+        text: "Inténtelo nuevamente",
+        icon: "error"
+      })
     }
   } else {
     saveCredentialsAndLogin(userName, password)
