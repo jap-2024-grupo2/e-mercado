@@ -25,30 +25,30 @@ function setInputValue(fieldId, value) {
 
 // Función para cargar la foto de perfil desde localStorage
 function loadProfilePicture() {
-    const storedProfilePic = localStorage.getItem('profilePic')
-    const profileImgElement = document.querySelector('.rounded-circle')
-  
-    if (storedProfilePic) {
-      profileImgElement.src = storedProfilePic // Usamos la imagen guardada
-    }
+  const storedProfilePic = localStorage.getItem('profilePic')
+  const profileImgElement = document.querySelector('.rounded-circle')
+
+  if (storedProfilePic) {
+    profileImgElement.src = storedProfilePic // Usamos la imagen guardada
   }
-  
-  // Función para manejar la carga de la imagen de perfil
-  function handleProfilePictureChange(event) {
-    const file = event.target.files[0]
-    
-    if (file) {
-      const reader = new FileReader()
-  
-      reader.onloadend = function () {
-        const base64String = reader.result
-        localStorage.setItem('profilePic', base64String) // Almacenamos la imagen en Base64
-        loadProfilePicture() // Actualizamos la vista de la imagen
-      }
-  
-      reader.readAsDataURL(file) // Convertimos la imagen en Base64
+}
+
+// Función para manejar la carga de la imagen de perfil
+function handleProfilePictureChange(event) {
+  const file = event.target.files[0]
+
+  if (file) {
+    const reader = new FileReader()
+
+    reader.onloadend = function () {
+      const base64String = reader.result
+      localStorage.setItem('profilePic', base64String) // Almacenamos la imagen en Base64
+      loadProfilePicture() // Actualizamos la vista de la imagen
     }
+
+    reader.readAsDataURL(file) // Convertimos la imagen en Base64
   }
+}
 
 // Validamos que los campos obligatorios no estén vacíos
 function validateRequiredFields() {
@@ -94,9 +94,19 @@ function handleFormSubmit(event) {
 
   if (validateRequiredFields()) {
     saveFormData()
-    alert('✅ Los datos han sido guardados correctamente.')
+    Swal.fire({
+      title: "Éxito!",
+      text: "Los datos han sido guardados correctamente",
+      icon: "success",
+      timer: 2000,
+      showConfirmButton: false
+    })
   } else {
-    alert('❌ Por favor, complete todos los campos obligatorios (*).')
+    Swal.fire({
+      title: "Error!",
+      text: "Por favor, complete todos los campos obligatorios (*)",
+      icon: "error"
+    })
   }
 }
 
