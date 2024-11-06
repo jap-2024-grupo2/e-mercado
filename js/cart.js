@@ -213,3 +213,19 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCart()
   calculateTotals()
 })
+
+//Funcion para manejar la secuencia de apertura de modales
+function openPaymentOptions() {
+  // Espera a que el modal actual se cierre y luego abre el siguiente
+  setTimeout(function() {
+    const paymentModal = new bootstrap.Modal(document.getElementById('modalPaymentOptions'));
+    paymentModal.show();
+  }, 500); // Da un pequeño retraso para asegurar que el primer modal se cierre completamente
+}
+
+function openShippingOptions() {
+  setTimeout(function() {
+    const shippingModal = new bootstrap.Modal(document.getElementById('modalShippingOptions'));
+    shippingModal.show();
+  }, 500); // Espera antes de abrir el modal anterior
+}

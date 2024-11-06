@@ -39,41 +39,168 @@
               </table>
             </div>
 
-            <!-- Contenedor para el alert -->
-            <div id="cart-alert" class="my-4"></div>
+            <!-- Modal de Selección de Envío -->
+            <div class="modal fade" id="modalShippingOptions" aria-hidden="true" aria-labelledby="modalShippingLabel"
+              tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalShippingLabel">Selecciona el Tipo de Envío</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- Contenedor para Tipo de Envío -->
+                    <div class="d-flex justify-content-center">
+                      <div class="card w-100 w-md-75 w-lg-50 shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+                        <div class="card-body p-4">
+                          <div class="row">
+                            <div class="mb-3">
+                              <label class="form-label">Elige la forma de entrega</label>
+                              <hr class="my-2">
 
-            <div class="d-flex justify-content-center">
-              <div class="card w-100 w-md-75 w-lg-50 shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
-                <div class="card-body p-4">
-                  <div class="row">
-                    <div class="">
-                      <div class="d-flex justify-content-between" style="font-weight: 500;">
-                        <p class="mb-2">USD (Dólares)</p>
-                        <p class="mb-2 usd-total"></p>
-                      </div>
-
-                      <div class="d-flex justify-content-between" style="font-weight: 500;">
-                        <p class="mb-0">UYU (Pesos uruguayos)</p>
-                        <p class="mb-0 uyu-total"></p>
-                      </div>
-
-                      <hr class="my-4">
-
-                      <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
-                        <p class="mb-2">Total (UYU)</p>
-                        <p class="mb-2 grand-total"></p>
-                      </div>
-
-                      <div class="text-end">
-                        <button id="pay-button" type="button" class="btn btn-primary btn-lg">
-                          Pagar
-                        </button>
+                              <div>
+                                <input type="radio" name="shipping-type" value="premium" id="shippingPremium" checked>
+                                <label for="shippingPremium">Premium 2 a 5 días (<span id="premiumCost">UYU
+                                    0</span>)</label>
+                              </div>
+                              <div>
+                                <input type="radio" name="shipping-type" value="express" id="shippingExpress">
+                                <label for="shippingExpress">Express 5 a 8 días (<span id="expressCost">UYU
+                                    0</span>)</label>
+                              </div>
+                              <div>
+                                <input type="radio" name="shipping-type" value="standard" id="shippingStandard">
+                                <label for="shippingStandard">Standard 12 a 15 días (<span id="standardCost">UYU
+                                    0</span>)</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
+
+
+
+                    <!-- Contenedor para Dirección de Envío -->
+                    <div class="d-flex justify-content-center my-4">
+                      <div class="card w-100 w-md-75 w-lg-50 shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+                        <div class="card-body p-4">
+                          <div class="row">
+                            <div class="mb-3">
+                              <label class="form-label">Dirección de envío</label>
+                              <hr class="my-2">
+
+                              <input type="text" class="form-control mb-2" placeholder="Departamento"
+                                id="shippingDepartment">
+                              <input type="text" class="form-control mb-2" placeholder="Localidad" id="shippingCity">
+                              <input type="text" class="form-control mb-2" placeholder="Calle" id="shippingStreet">
+                              <input type="text" class="form-control mb-2" placeholder="Número" id="shippingNumber">
+                              <input type="text" class="form-control mb-2" placeholder="Esquina" id="shippingCorner">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-primary" data-bs-dismiss="modal"
+                      onclick="openPaymentOptions()">Siguiente</button>
                   </div>
                 </div>
               </div>
             </div>
+
+            <!-- Modal de Opciones de Pago -->
+            <div class="modal fade" id="modalPaymentOptions" aria-hidden="true" aria-labelledby="modalPaymentLabel"
+              tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalPaymentLabel">Opciones de Pago</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <!-- Contenedor para Forma de Pago -->
+                    <div class="d-flex justify-content-center">
+                      <div class="card w-100 w-md-75 w-lg-50 shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+                        <div class="card-body p-4">
+                          <div class="row">
+                            <div class="mb-3">
+                              <label class="form-label">Elige cómo pagar</label>
+                              <hr class="my-2">
+
+                              <div>
+                                <input type="radio" name="payment-method" value="credit-card" id="paymentCreditCard"
+                                  checked>
+                                <label for="paymentCreditCard">Tarjeta de crédito</label>
+                              </div>
+                              <div>
+                                <input type="radio" name="payment-method" value="bank-transfer"
+                                  id="paymentBankTransfer">
+                                <label for="paymentBankTransfer">Transferencia bancaria</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Contenedor para Resumen de Compras -->
+                    <div id="cart-alert" class="my-4"></div>
+
+                    <div class="d-flex justify-content-center">
+                      <div class="card w-100 w-md-75 w-lg-50 shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+                        <div class="card-body p-4">
+                          <div class="row">
+                            <div class=" ">
+
+                              <h4 class="text-center">Resumen de compra</h4>
+
+                              <div class="d-flex justify-content-between" style="font-weight: 500;">
+                                <p class="mb-2">Subtotal Dólares</p>
+                                <p class="mb-2 usd-total"></p>
+                              </div>
+
+                              <div class="d-flex justify-content-between" style="font-weight: 500;">
+                                <p class="mb-2">Subtotal Pesos uruguayos</p>
+                                <p class="mb-2 uyu-total"></p>
+                              </div>
+
+                              <div class="d-flex justify-content-between" style="font-weight: 500;">
+                                <p class="mb-0">Costo de envío</p>
+                                <p class="mb-0 shipping-cost"></p>
+                              </div>
+
+                              <hr class="my-2">
+
+                              <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
+                                <p class="mb-2">Total (UYU)</p>
+                                <p class="mb-2 grand-total"></p>
+                              </div>
+
+                              <div class="text-end">
+                                <button id="pay-button" type="button" class="btn btn-primary btn-lg">
+                                  Pagar
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-primary" data-bs-dismiss="modal" onclick="openShippingOptions()">Volver
+                      atrás</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Botón para abrir el modal inicial -->
+            <a class="btn btn-primary" data-bs-toggle="modal" href="#modalShippingOptions" role="button">Continuar con
+              la compra</a>
 
           </div>
         </div>
