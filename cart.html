@@ -39,6 +39,8 @@
               </table>
             </div>
 
+            <div id="cart-alert" class="my-4"></div>
+
             <!-- Modal de Selección de Envío -->
             <div class="modal fade" id="modalShippingOptions" aria-hidden="true" aria-labelledby="modalShippingLabel"
               tabindex="-1">
@@ -147,9 +149,7 @@
                     </div>
 
                     <!-- Contenedor para Resumen de Compras -->
-                    <div id="cart-alert" class="my-4"></div>
-
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center my-4">
                       <div class="card w-100 w-md-75 w-lg-50 shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
                         <div class="card-body p-4">
                           <div class="row">
@@ -199,7 +199,7 @@
             </div>
 
             <!-- Botón para abrir el modal inicial -->
-            <a class="btn btn-primary" data-bs-toggle="modal" href="#modalShippingOptions" role="button">Continuar con
+            <a class="btn btn-primary" data-bs-toggle="modal" href="#modalShippingOptions" role="button" id="open-modal">Continuar con
               la compra</a>
 
           </div>

@@ -199,6 +199,10 @@ document.getElementById('pay-button').addEventListener('click', function () {
           title: 'Pago realizado',
           text: 'Tu pago ha sido procesado con éxito.'
         }).then(() => {
+          const paymentModal = bootstrap.Modal.getInstance(document.getElementById('modalPaymentOptions'));
+          if (paymentModal) {
+            paymentModal.hide();
+          }                  //Cierra el modal
           renderCart()      // Llamamos a la función para actualizar la vista
           calculateTotals() // Actualizamos los totales
           dispatchCartUpdatedEvent(); // Llamada para actualizar el badge en tiempo real
@@ -213,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCart()
   calculateTotals()
 })
+
 
 //Funcion para manejar la secuencia de apertura de modales
 function openPaymentOptions() {
