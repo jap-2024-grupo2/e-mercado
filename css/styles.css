@@ -29,8 +29,8 @@ nav a {
 }
 
 .jumbotron {
-  height: 50vh;
-  padding: 5em inherit;
+  height: 50vh; /* Puedes ajustar esto si deseas que ocupe más o menos espacio en pantallas grandes */
+  padding: 2em; /* Reducido en pantallas más pequeñas */
   margin-bottom: 0;
   background-color: #53c0fb;
   background: url('../img/cover_back.png');
@@ -39,6 +39,23 @@ nav a {
   background-repeat: no-repeat;
   color: black;
   font-weight: bold;
+  text-align: center; /* Para centrar el texto */
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 768px) {
+  .jumbotron {
+    height: 40vh; /* Menos altura en pantallas más pequeñas */
+    padding: 1.5em;
+  }
+}
+
+/* Media Queries para móviles */
+@media (max-width: 480px) {
+  .jumbotron {
+    height: 30vh; /* Aún menos altura en móviles */
+    padding: 1em;
+  }
 }
 
 @media (min-width: 768px) {
