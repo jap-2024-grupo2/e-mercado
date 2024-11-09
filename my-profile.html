@@ -1,112 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>eMercado - Todo lo que busques está aquí</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
-      rel="stylesheet"
-    />
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>eMercado | Todo lo que busques está aquí</title>
+  <link rel="icon" href="img/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+  <link href="css/styles.css" rel="stylesheet" />
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
       }
+    }
+  </style>
+</head>
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-  </head>
+<body>
+  <!-- Contenedor para la NAVBAR en navbar.js -->
+  <div class="navbar-container"></div>
 
-  <body>
-    <!-- Contenedor para la NAVBAR en navbar.js -->
-    <div class="navbar-container"></div>
-
-    <main>
-      <div class="container w-100 w-md-75 w-lg-25">
-        <h2 class="mt-5">Perfil de usuario</h2>
-        <div class="text-center">
-          <img
-            src="img/default-profile-picture.webp"
-            class="rounded-circle my-4"
-            style="width: 150px"
-            alt="Avatar"
-          />
-        </div>
-        <form id="profile-form">
-          <div class="mb-3">
-            <label for="userName" class="form-label">Nombre de usuario<span style="color: red;">*</span></label>
-            <input type="text" class="form-control" id="userName" required disabled/>
-          </div>
-          <div class="mb-3">
-            <label for="firstName" class="form-label">Nombre<span style="color: red;">*</span></label>
-            <input type="text" class="form-control" id="firstName" required />
-          </div>
-          <div class="mb-3">
-            <label for="secondName" class="form-label">Segundo nombre</label>
-            <input type="text" class="form-control" id="secondName" />
-          </div>
-          <div class="mb-3">
-            <label for="lastName" class="form-label">Apellido<span style="color: red;">*</span></label>
-            <input type="text" class="form-control" id="lastName" required />
-          </div>
-          <div class="mb-3">
-            <label for="secondLastName" class="form-label">
-              Segundo apellido
-            </label>
-            <input type="text" class="form-control" id="secondLastName" />
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">E-mail<span style="color: red;">*</span></label>
-            <input type="email" class="form-control" id="email" required />
-          </div>
-          <div class="mb-3">
-            <label for="phone" class="form-label">Teléfono de contacto</label>
-            <input type="tel" class="form-control" id="phone" />
-          </div>
-          <div class="mb-4">
-            <label for="profilePic" class="form-label">Foto de perfil</label>
-            <input
-              type="file"
-              class="form-control"
-              id="profilePic"
-              accept="image/*"
-            />
-          </div>
-          <div class="mb-5 form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="themeSwitch" />
-            <label class="form-check-label" for="themeSwitch">
-              Modo día/noche
-            </label>
-          </div>
-          <button type="submit" class="btn btn-primary">Guardar cambios</button>
-        </form>
+  <main>
+    <div class="container w-100 w-md-75 w-lg-25">
+      <h2 class="mt-5">Perfil de usuario</h2>
+      <div class="text-center">
+        <img src="img/default-profile-picture.webp" class="rounded-circle my-4" style="width: 150px" alt="Avatar" />
       </div>
-    </main>
+      <form id="profile-form">
+        <div class="mb-3">
+          <label for="userName" class="form-label">Nombre de usuario<span style="color: red;">*</span></label>
+          <input type="text" class="form-control" id="userName" required disabled />
+        </div>
+        <div class="mb-3">
+          <label for="firstName" class="form-label">Nombre<span style="color: red;">*</span></label>
+          <input type="text" class="form-control" id="firstName" required />
+        </div>
+        <div class="mb-3">
+          <label for="secondName" class="form-label">Segundo nombre</label>
+          <input type="text" class="form-control" id="secondName" />
+        </div>
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Apellido<span style="color: red;">*</span></label>
+          <input type="text" class="form-control" id="lastName" required />
+        </div>
+        <div class="mb-3">
+          <label for="secondLastName" class="form-label">
+            Segundo apellido
+          </label>
+          <input type="text" class="form-control" id="secondLastName" />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">E-mail<span style="color: red;">*</span></label>
+          <input type="email" class="form-control" id="email" required />
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">Teléfono de contacto</label>
+          <input type="tel" class="form-control" id="phone" />
+        </div>
+        <div class="mb-4">
+          <label for="profilePic" class="form-label">Foto de perfil</label>
+          <input type="file" class="form-control" id="profilePic" accept="image/*" />
+        </div>
+        <div class="mb-5 form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="themeSwitch" />
+          <label class="form-check-label" for="themeSwitch">
+            Modo día/noche
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      </form>
+    </div>
+  </main>
 
   <!-- Contenedor para el FOOTER en footer.js -->
   <div class="footer-container"></div>
 
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/init.js"></script>
-    <script src="js/navbar.js"></script>
-    <script src="js/footer.js"></script>
-    <script src="js/my-profile.js"></script>
-    <script src="js/logout.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/my-profile.js"></script>
+  <script src="js/logout.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  </body>
+</body>
+
 </html>
