@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'shippingNumber',
     'shippingCorner'
   ]
-  addressFields.forEach((id) => { document.getElementById(id).addEventListener('input', validateAddressFields })
+  addressFields.forEach((id) => { document.getElementById(id).addEventListener('input', validateAddressFields) })
 })
 
 // Función que valida los campos de dirección y de envío
