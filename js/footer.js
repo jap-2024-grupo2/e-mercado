@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
+  const baseURL = window.location.hostname.includes('github.io') ? '/e-mercado' : '';
+
   // Lista de integrantes del grupo
   const groupMembers = [
     {
@@ -10,19 +12,19 @@ document.addEventListener('DOMContentLoaded', function () {
     {
       name: 'Kelly Salas',
       link: 'https://github.com/ksalas039',
-      imgSrc: '/img/kelly-profile.png',
+      imgSrc: `${baseURL}/img/kelly-profile.png`,
       altText: 'Kelly Salas'
     },
     {
       name: 'Fernanda Rigali',
       link: 'https://github.com/FerRigali',
-      imgSrc: '/img/fernanda-profile.jpg',
+      imgSrc: `${baseURL}/img/fernanda-profile.jpg`,
       altText: 'Fernanda Rigali'
     },
     {
       name: 'Ailen Albornoz',
       link: 'https://github.com/AilenAlbornoz',
-      imgSrc: '/img/ailen-profile.jpeg',
+      imgSrc: `${baseURL}/img/ailen-profile.jpeg`,
       altText: 'Ailen Albornoz'
     }
   ]
@@ -63,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <p class="text-muted">Este sitio web forma parte de</p>
           <a href="https://tu-enlace.com" target="_blank" rel="noopener noreferrer">
             <img 
-              src="/img/jap-logo.png" 
+              src="${baseURL}/img/jap-logo.png" 
               alt="Imagen del footer" 
               class="img-fluid" 
               style="max-width: 250px; transition: transform 0.3s ease; transform: scale(1);" 
