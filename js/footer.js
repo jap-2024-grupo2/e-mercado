@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const baseURL = window.location.hostname.includes('github.io') ? '/e-mercado' : '';
+  const baseURL = window.location.hostname.includes('github.io') ? '/e-mercado' : ''
 
   // Lista de integrantes del grupo
   const groupMembers = [
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <!-- Sección de la imagen principal -->
         <div class="mt-3 mb-5 text-center">
           <p class="text-muted">Este sitio web forma parte de</p>
-          <a href="https://tu-enlace.com" target="_blank" rel="noopener noreferrer">
+          <a href="https://jovenesaprogramar.edu.uy/" target="_blank" rel="noopener noreferrer">
             <img 
               src="${baseURL}/img/jap-logo.png" 
               alt="Imagen del footer" 
