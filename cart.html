@@ -18,7 +18,6 @@
   <div class="navbar-container"></div>
 
   <main>
-
     <section class="h-100 h-custom">
       <div class="container h-100 py-5">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -41,6 +40,34 @@
             </div>
 
             <div id="cart-alert" class="my-4"></div>
+
+            <div class="d-flex justify-content-center">
+              <div class="card w-100 w-md-75 w-lg-50 shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+                <div class="card-body p-4">
+                  <div class="row">
+                    <div class="">
+                      <div class="d-flex justify-content-between" style="font-weight: 500;">
+                        <p class="mb-2">USD (Dólares)</p>
+                        <p class="mb-2 usd-total"></p>
+                      </div>
+                      <div class="d-flex justify-content-between" style="font-weight: 500;">
+                        <p class="mb-0">UYU (Pesos uruguayos)</p>
+                        <p class="mb-0 uyu-total"></p>
+                      </div>
+                      <hr class="my-4">
+                      <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
+                        <p class="mb-2">Subtotal (UYU)</p>
+                        <p class="mb-2 grand-total"></p>
+                      </div>
+                      <div class="d-flex justify-content-center">
+                        <!-- Botón para abrir el modal inicial -->
+                        <a class="btn btn-primary" role="button" id="open-modal">Continuar con la compra</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <!-- Modal de Selección de Envío -->
             <div class="modal fade" id="modalShippingOptions" aria-hidden="true" aria-labelledby="modalShippingLabel"
@@ -101,8 +128,7 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-dismiss="modal"
-                      onclick="openPaymentOptions()">Siguiente</button>
+                    <button class="btn btn-primary" onclick="openPaymentOptions()">Siguiente</button>
                   </div>
                 </div>
               </div>
@@ -128,6 +154,7 @@
                               <label class="form-label">Elige cómo pagar</label>
                               <hr class="my-2">
 
+                              <!-- Opciones de método de pago -->
                               <div>
                                 <input type="radio" name="payment-method" value="credit-card" id="paymentCreditCard"
                                   checked>
@@ -138,6 +165,34 @@
                                   id="paymentBankTransfer">
                                 <label for="paymentBankTransfer">Transferencia bancaria</label>
                               </div>
+                            </div>
+
+                            <!-- Campos para tarjeta de crédito -->
+                            <div id="creditCardFields" class="payment-fields">
+                              <label for="cardNumber">Número de tarjeta</label>
+                              <input type="text" id="cardNumber" class="form-control mb-3"
+                                placeholder="1234 5678 9012 3456">
+
+                              <label for="cardName">Nombre en la tarjeta</label>
+                              <input type="text" id="cardName" class="form-control mb-3" placeholder="Nombre completo">
+
+                              <label for="cardExpiry">Fecha de expiración</label>
+                              <input type="text" id="cardExpiry" class="form-control mb-3" placeholder="MM/AA">
+
+                              <label for="cardCVC">Código CVC</label>
+                              <input type="text" id="cardCVC" class="form-control mb-3" placeholder="123">
+                            </div>
+
+                            <!-- Campos para transferencia bancaria -->
+                            <div id="bankTransferFields" class="payment-fields" style="display: none;">
+                              <label for="bankName">Nombre del banco</label>
+                              <input type="text" id="bankName" class="form-control mb-3" placeholder="Nombre del banco">
+
+                              <label for="accountNumber">Número de cuenta</label>
+                              <input type="text" id="accountNumber" class="form-control mb-3" placeholder="1234567890">
+
+                              <label for="swiftCode">Código SWIFT</label>
+                              <input type="text" id="swiftCode" class="form-control mb-3" placeholder="SWIFT/BIC">
                             </div>
                           </div>
                         </div>
@@ -176,8 +231,8 @@
                               </div>
 
                               <div class="text-end">
-                                <button id="pay-button" type="button" class="btn btn-primary btn-lg">
-                                  Pagar
+                                <button id="pay-button" type="button" class="btn btn-primary btn-md">
+                                  Finalizar compra
                                 </button>
                               </div>
                             </div>
@@ -187,19 +242,12 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-dismiss="modal" onclick="openShippingOptions()">Volver
-                      atrás</button>
+                    <button class="btn text-primary border-0 bg-transparent text-decoration-underline"
+                      data-bs-dismiss="modal" onclick="openShippingOptions()">Volver atrás</button>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="d-flex justify-content-center">
-              <!-- Botón para abrir el modal inicial -->
-              <a class="btn btn-primary" role="button" id="open-modal">Continuar con la compra</a>
-            </div>
-
-
 
           </div>
         </div>
@@ -219,6 +267,7 @@
       <div></div>
     </div>
   </div>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/navbar.js"></script>
