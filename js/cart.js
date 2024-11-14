@@ -154,8 +154,8 @@ function calculateTotals() {
   const totalConvertedUSD = totalUSD * USD_TO_UYU
 
   // Actualizamos los totales en el DOM
-  document.querySelector('.usd-total').textContent = `USD ${totalUSD}`
-  document.querySelector('.uyu-total').textContent = `UYU ${totalUYU}`
+  document.querySelectorAll('.usd-total').forEach((element)=>{element.textContent = `USD ${totalUSD}`})
+  document.querySelectorAll('.uyu-total').forEach((element)=>{element.textContent = `UYU ${totalUYU}`})
 
   // Calculamos el costo de envío y actualizamos la visualización
   calculateShippingCost(totalConvertedUSD, totalUYU)
@@ -193,7 +193,7 @@ function calculateShippingCost(totalConvertedUSD, totalUYU) {
   const grandTotal = totalConvertedUSD + totalUYU + shippingCost
 
   // Actualizamos el DOM con el grandTotal final
-  document.querySelector('.grand-total').textContent = `UYU ${grandTotal.toFixed(0)}`
+  document.querySelectorAll('.grand-total').forEach((element)=>{element.textContent = `UYU ${grandTotal.toFixed(0)}`})
 }
 
 // Función para separar la moneda del valor numérico
@@ -217,7 +217,13 @@ document.getElementById('pay-button').addEventListener('click', function () {
       text: 'Agrega productos al carrito antes de continuar.'
     })
   } else {
-    // Si hay productos, mostramos una alerta con dos opciones
+
+    // Verificamos que los campos de pago son válidos
+    if (!validatePaymentFields()){
+      return // si los campos no son válidos, no continuamos la ejecución
+    }
+
+    // Si hay productos y los campos de pago son válidos, mostramos una alerta con dos opciones
     Swal.fire({
       title: 'Confirmar Pago',
       text: '¿Estás seguro que deseas proceder con el pago?',
@@ -358,3 +364,108 @@ function validateAddressAndShipping() {
 
   return true
 }
+
+// Función para manejar el cambio de los campos de método de pago
+document.querySelectorAll('input[name="payment-method"]').forEach((radioButton)=>{
+  radioButton.addEventListener("change", function(){
+    const creditCardFields = document.getElementById("creditCardFields")
+    const bankTransferFields = document.getElementById("bankTransferFields")
+
+    if (this.value === "credit-card"){
+      creditCardFields.style.display = "block"
+      bankTransferFields.style.display = "none"
+    } else if (this.value === "bank-transfer") {
+      creditCardFields.style.display = "none"
+      bankTransferFields.style.display = "block"
+    }
+  })
+})
+
+// Función para validar los campos de pago
+function validatePaymentFields() {
+  const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value
+
+  if (paymentMethod === 'credit-card') {
+    // Validación para tarjeta de crédito
+    const cardNumber = document.getElementById('cardNumber').value.trim()
+    const cardName = document.getElementById('cardName').value.trim()
+    const cardExpiry = document.getElementById('cardExpiry').value.trim()
+    const cardCVC = document.getElementById('cardCVC').value.trim()
+
+    if (!cardNumber || !cardName || !cardExpiry || !cardCVC) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Campos incompletos',
+        text: 'Por favor completa todos los campos de tarjeta de crédito.'
+      })
+      return false
+    }
+
+    // Validamos el formato de tarjeta
+    if (!/^\d{16}$/.test(cardNumber)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Número de tarjeta inválido',
+        text: 'El número de tarjeta debe tener 16 dígitos.'
+      })
+      return false
+    }
+
+    // Validamos fecha de expiración (simplemente comprueba el formato MM/AA)
+    if (!/^\d{2}\/\d{2}$/.test(cardExpiry)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Fecha de expiración inválida',
+        text: 'La fecha de expiración debe tener el formato MM/AA.'
+      })
+      return false
+    }
+
+    // Validamos CVC
+    if (!/^\d{3}$/.test(cardCVC)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'CVC inválido',
+        text: 'El código CVC debe tener 3 dígitos.'
+      })
+      return false
+    }
+  } else if (paymentMethod === 'bank-transfer') {
+    // Validación para transferencia bancaria
+    const bankName = document.getElementById('bankName').value.trim()
+    const accountNumber = document.getElementById('accountNumber').value.trim()
+    const swiftCode = document.getElementById('swiftCode').value.trim()
+
+    if (!bankName || !accountNumber || !swiftCode) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Campos incompletos',
+        text: 'Por favor completa todos los campos de transferencia bancaria.'
+      })
+      return false
+    }
+
+    // Validamos el formato de la cuenta bancaria
+    if (!/^\d+$/.test(accountNumber)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Número de cuenta inválido',
+        text: 'El número de cuenta debe ser numérico.'
+      })
+      return false
+    }
+
+    // Validamos el formato SWIFT
+    if (!/^[A-Za-z0-9]{8,11}$/.test(swiftCode)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Código SWIFT inválido',
+        text: 'El código SWIFT debe tener entre 8 y 11 caracteres alfanuméricos.'
+      })
+      return false
+    }
+  }
+
+  return true // Si todos los campos son válidos
+}
+
